@@ -7,6 +7,9 @@ using Rebus.Config;
 
 namespace ContactManager.Api.Infrastructure
 {
+    /// <summary>
+    /// Message Bus
+    /// </summary>
     public class MessageBus : IMessageBus
     {
         private readonly ILogger<MessageBus> _logger;
@@ -17,6 +20,11 @@ namespace ContactManager.Api.Infrastructure
 
         private event EventHandler<MessageBase>? ResponseReceived;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="logger">Logger</param>
+        /// <param name="serviceProvider">Service provider</param>
         public MessageBus(ILogger<MessageBus> logger, IServiceProvider serviceProvider)
         {
             _logger = logger;
@@ -37,12 +45,14 @@ namespace ContactManager.Api.Infrastructure
             _bus.Subscribe<GetResponseMessage>().Wait();
         }
 
+        /// inheritdoc
         public void Dispose()
         {
             _bus.Dispose();
             _activator.Dispose();
         }
 
+        /// inheritdoc
         public Task HandleResponse(MessageBase responseMessage)
         {
             return Task.Factory.StartNew(() =>
@@ -58,6 +68,7 @@ namespace ContactManager.Api.Infrastructure
             });
         }
 
+        /// inheritdoc
         public async Task<TResponse> PublishMessageAndWaitForResponseAsync<TResponse>(MessageBase requestMessage) where TResponse : MessageBase
         {
             // Define local response received event.
