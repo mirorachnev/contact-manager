@@ -1,4 +1,8 @@
-﻿using ContactManager.Common;
+﻿using AutoMapper;
+using ContactManager.Common;
+using ContactManager.DataProvider.Repositories;
+using ContactManager.MessageBus.Messages.DataTypes;
+using ContactManager.MessageBus.Messages.DataTypes.Enums;
 using ContactManager.MessageBus.Messages.RequestResponses;
 using Microsoft.Extensions.Logging;
 using Rebus.Activation;
@@ -20,16 +24,22 @@ namespace ContactManager.DataProvider.Infrastructure
         private readonly ILogger<MessageBus> _logger;
         private readonly string _connectionString;
         private readonly BuiltinHandlerActivator _activator;
+        private readonly IMapper _mapper;
+        private readonly IContactsRepository _contactsRepository;
         private IBus? _bus;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="logger">Logger</param>
-        public MessageBus(ILogger<MessageBus> logger)
+        /// <param name="mapper">Automapper</param>
+        /// <param name="contactsRepository">Contacts repository</param>
+        public MessageBus(ILogger<MessageBus> logger, IMapper mapper, IContactsRepository contactsRepository)
         {
+            _contactsRepository = contactsRepository;
             _logger = logger;
             _connectionString = Constants.RabbitMqConnectionString;
+            _mapper = mapper;
 
             _activator = new BuiltinHandlerActivator();
             _activator.Handle<GetRequestMessage>(x => HandleRequest(x));
@@ -57,21 +67,47 @@ namespace ContactManager.DataProvider.Infrastructure
             _activator.Dispose();
         }
 
-        private Task HandleRequest(GetRequestMessage requestMessage)
+        private async Task HandleRequest(GetRequestMessage requestMessage)
         {
-            return Task.Factory.StartNew(() =>
+            try
             {
-                try
+                var result = new List<ContactData>();
+                GetResponseMessage? response = default;
+
+                switch (requestMessage.GetReuestType)
                 {
-                    // To do 
-                    // Handle request here
-                    //_bus?.Reply(new GetResponseMessage(requestMessage.Content + "response")).Wait();
+                    case GetRequestType.ById:
+                        var contact = await _contactsRepository.GetAsync((Guid)requestMessage.Id!);
+
+                        if (contact == null)
+                        {
+                            response = new GetResponseMessage(requestMessage.RequestMessageId, null, StatusCode.NotFound, null);
+                        }
+                        else
+                        {
+                            result.Add(_mapper.Map<ContactData>(contact));
+                            response = new GetResponseMessage(requestMessage.RequestMessageId, null, StatusCode.Ok, result);
+                        }
+                        
+                        break;
+                    case GetRequestType.ByQuery:
+                        var contacts = await _contactsRepository.GetAsync(requestMessage.Query);
+                        result.AddRange(_mapper.Map<IEnumerable<ContactData>>(contacts));
+                        response = new GetResponseMessage(requestMessage.RequestMessageId, null, StatusCode.Ok, result);
+                        break;
+                    default:
+                        break;
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogWarning(ex.Message);
-                }
-            });
+
+                
+                await _bus!.Reply(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.Message);
+                var response = new GetResponseMessage(requestMessage.RequestMessageId, ex.Message, StatusCode.Error, null);
+                await _bus!.Reply(response);
+            }
         }
     }
 }

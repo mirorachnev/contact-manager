@@ -35,10 +35,7 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
         public GetRequestMessage(Guid requestMessageId, string returnAddress,
             GetRequestType getRequestType, string? query, Guid? id)
             : base(requestMessageId, returnAddress)
-        {
-            if (query == null && id == null)
-                throw new ArgumentException("Both query and id cannot be null");
-
+        {            
             GetReuestType = getRequestType;
             Query = query;
             Id = id;

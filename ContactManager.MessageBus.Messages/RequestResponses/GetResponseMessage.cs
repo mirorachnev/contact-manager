@@ -13,7 +13,7 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
         /// <summary>
         /// Contact data to be returned
         /// </summary>
-        public IEnumerable<ContactData> Contacts { get; }
+        public IEnumerable<ContactData>? Contacts { get; }
 
         /// <summary>
         /// Constructor
@@ -22,7 +22,7 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
         /// <param name="errorMessage">Error message</param>
         /// <param name="statusCode">Status code</param>
         /// <param name="contacts">Contact data</param>
-        public GetResponseMessage(Guid requestMessageId, string? errorMessage, StatusCode statusCode, IEnumerable<ContactData> contacts)
+        public GetResponseMessage(Guid requestMessageId, string? errorMessage, StatusCode statusCode, IEnumerable<ContactData>? contacts)
             : base(requestMessageId, errorMessage, statusCode)
         {
             Contacts = contacts;

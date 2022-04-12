@@ -1,6 +1,7 @@
 ﻿using ContactManager.Common;
 using ContactManager.DataProvider.DbData;
 using ContactManager.DataProvider.Infrastructure;
+using ContactManager.DataProvider.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ IHostBuilder hostBuilder = Host.CreateDefaultBuilder()
     .ConfigureServices(services => 
         services
         .AddSingleton<IMessageBus, MessageBus>()
+        .AddSingleton<IContactsRepository, ContactsRepository>()
         .AddDbContext<ContactManagerDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString(Constants.ContactManagerDbConnectionStringName))));
 
