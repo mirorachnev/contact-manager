@@ -29,8 +29,10 @@ IHostBuilder hostBuilder = Host.CreateDefaultBuilder()
         .AddDbContext<ContactManagerDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString(Constants.ContactManagerDbConnectionStringName))));
 
-
 IHost host = hostBuilder.Build();
+
+var context = host.Services.GetService<ContactManagerDbContext>();
+context?.Database.Migrate();
 
 var messageBus = host.Services.GetService<IMessageBus>();
 messageBus?.ConnectAsync().Wait();
