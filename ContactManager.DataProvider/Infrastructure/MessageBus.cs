@@ -42,7 +42,7 @@ namespace ContactManager.DataProvider.Infrastructure
             _mapper = mapper;
 
             _activator = new BuiltinHandlerActivator();
-            _activator.Handle<GetRequestMessage>(x => HandleRequest(x));
+            _activator.Handle<RequestMessageBase>(x => HandleRequest(x));
         }
 
         /// <inheritdoc/>
@@ -67,7 +67,15 @@ namespace ContactManager.DataProvider.Infrastructure
             _activator.Dispose();
         }
 
-        private async Task HandleRequest(GetRequestMessage requestMessage)
+        private async Task HandleRequest(RequestMessageBase requestMessage)
+        {
+            if (requestMessage is GetRequestMessage getRequestMessage)
+            {
+                await HandleGetRequest(getRequestMessage);
+            }
+        }
+
+        private async Task HandleGetRequest(GetRequestMessage requestMessage)
         {
             try
             {
@@ -88,7 +96,7 @@ namespace ContactManager.DataProvider.Infrastructure
                             result.Add(_mapper.Map<ContactData>(contact));
                             response = new GetResponseMessage(requestMessage.RequestMessageId, null, StatusCode.Ok, result);
                         }
-                        
+
                         break;
                     case GetRequestType.ByQuery:
                         var contacts = await _contactsRepository.GetAsync(requestMessage.Query);
@@ -99,7 +107,6 @@ namespace ContactManager.DataProvider.Infrastructure
                         break;
                 }
 
-                
                 await _bus!.Reply(response);
             }
             catch (Exception ex)
