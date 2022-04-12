@@ -10,17 +10,27 @@ using System.Threading.Tasks;
 
 namespace ContactManager.DataProvider.DbData
 {
+    /// <summary>
+    /// Data context
+    /// </summary>
     public class ContactManagerDbContext : DbContext
     {
-        //private readonly IConfiguration _configuration;
-
-        //public ContactManagerDbContext() { }
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="dbContextOptions">Context options</param>
         public ContactManagerDbContext(DbContextOptions<ContactManagerDbContext> dbContextOptions)
             : base(dbContextOptions) { }
 
+        /// <summary>
+        /// Contacts
+        /// </summary>
         public ICollection<Contact> Contacts { get; set; }
 
+        /// <summary>
+        /// On model creating
+        /// </summary>
+        /// <param name="modelBuilder">Model builder</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Contact>()
