@@ -8,11 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.MessageBus.Messages", "ContactManager.MessageBus.Messages\ContactManager.MessageBus.Messages.csproj", "{1DF30A6F-96A3-4247-8CD5-7DB0160A7AF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.MessageBus.Messages", "ContactManager.MessageBus.Messages\ContactManager.MessageBus.Messages.csproj", "{1DF30A6F-96A3-4247-8CD5-7DB0160A7AF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Common", "ContactManager.Common\ContactManager.Common.csproj", "{7A85ABD1-CBCB-457C-8A6A-512B0CE23D19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.Common", "ContactManager.Common\ContactManager.Common.csproj", "{7A85ABD1-CBCB-457C-8A6A-512B0CE23D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.DataProvider", "ContactManager.DataProvider\ContactManager.DataProvider.csproj", "{9C82EF0C-E26D-4AD4-9C12-96D8E06F451A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.DataProvider", "ContactManager.DataProvider\ContactManager.DataProvider.csproj", "{9C82EF0C-E26D-4AD4-9C12-96D8E06F451A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Api", "ContactManager.Api\ContactManager.Api.csproj", "{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{9C82EF0C-E26D-4AD4-9C12-96D8E06F451A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C82EF0C-E26D-4AD4-9C12-96D8E06F451A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C82EF0C-E26D-4AD4-9C12-96D8E06F451A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
