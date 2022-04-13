@@ -30,5 +30,11 @@ namespace ContactManager.Api.Handlers
         {
             return _messageBus.HandleResponse(message);
         }
+
+        /// inheritdoc 
+        public Task Handle(DeleteResponseMessage message)
+        {
+            return _messageBus.HandleResponse(message);
+        }
     }
 }

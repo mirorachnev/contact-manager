@@ -69,7 +69,7 @@ namespace ContactManager.Api.Controllers
             if (response.StatusCode == MessageBus.Messages.DataTypes.Enums.StatusCode.Error)
                 return new ObjectResult(response.ErrorMessage) { StatusCode = StatusCodes.Status500InternalServerError };
 
-            if (!response.Contacts!.Any())
+            if (response.StatusCode == MessageBus.Messages.DataTypes.Enums.StatusCode.NotFound)
                 return NotFound();
 
             var result = _mapper.Map<Contact>(response.Contacts?.FirstOrDefault());
@@ -99,6 +99,29 @@ namespace ContactManager.Api.Controllers
 
             if (response.StatusCode == MessageBus.Messages.DataTypes.Enums.StatusCode.Error)
                 return new ObjectResult(response.ErrorMessage) { StatusCode = StatusCodes.Status500InternalServerError };
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Delete contact
+        /// </summary>
+        /// <param name="id">Id</param>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var deleteRequestMessage = new DeleteRequestMessage(Guid.NewGuid(), Constants.ApiServiceReturnAddress, id);
+
+            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<DeleteResponseMessage>(deleteRequestMessage);
+
+            if (response is null)
+                return new ObjectResult("Response was not received.") { StatusCode = StatusCodes.Status500InternalServerError };
+
+            if (response.StatusCode == MessageBus.Messages.DataTypes.Enums.StatusCode.Error)
+                return new ObjectResult(response.ErrorMessage) { StatusCode = StatusCodes.Status500InternalServerError };
+
+            if (response.StatusCode == MessageBus.Messages.DataTypes.Enums.StatusCode.NotFound)
+                return NotFound();
 
             return Ok();
         }

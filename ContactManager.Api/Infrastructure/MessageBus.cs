@@ -44,6 +44,7 @@ namespace ContactManager.Api.Infrastructure
 
             _bus.Subscribe<GetResponseMessage>().Wait();
             _bus.Subscribe<CreateResponseMessage>().Wait();
+            _bus.Subscribe<DeleteResponseMessage>().Wait();
         }
 
         /// inheritdoc

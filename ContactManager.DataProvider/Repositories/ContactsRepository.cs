@@ -38,9 +38,25 @@ namespace ContactManager.DataProvider.Repositories
         }
 
         /// inheritdoc
-        public Task Delete(Guid id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var contact = await _context.Contacts.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (contact != null)
+                {
+                    _context.Contacts.Remove(contact);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.Message);
+                throw;
+            }
         }
 
         /// inheritdoc

@@ -8,7 +8,8 @@ namespace ContactManager.Api.Handlers
     /// </summary>
     public interface IHandleResponseBusMessages : 
         IHandleMessages<GetResponseMessage>,
-        IHandleMessages<CreateResponseMessage>
+        IHandleMessages<CreateResponseMessage>,
+        IHandleMessages<DeleteResponseMessage>
     {
     }
 }

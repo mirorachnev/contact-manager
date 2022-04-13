@@ -32,7 +32,7 @@ namespace ContactManager.DataProvider.Repositories
         /// </summary>
         /// <param name="id">Id</param>
         /// <returns></returns>
-        Task Delete(Guid id);
+        Task<bool> DeleteAsync(Guid id);
 
         /// <summary>
         /// Update contact entity

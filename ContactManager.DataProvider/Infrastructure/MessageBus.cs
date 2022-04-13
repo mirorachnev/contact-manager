@@ -55,6 +55,7 @@ namespace ContactManager.DataProvider.Infrastructure
             // Subscribe to messages
             await _bus.Subscribe<GetRequestMessage>();
             await _bus.Subscribe<CreateRequestMessage>();
+            await _bus.Subscribe<DeleteRequestMessage>();
         }
 
         /// <inheritdoc/>
@@ -74,6 +75,30 @@ namespace ContactManager.DataProvider.Infrastructure
             if (requestMessage is CreateRequestMessage createRequestMessage)
             {
                 await HandleCreateRequest(createRequestMessage);
+            }
+
+            if (requestMessage is DeleteRequestMessage deleteRequestMessage)
+            {
+                await HandleDeleteRequest(deleteRequestMessage);
+            }
+        }
+
+        private async Task HandleDeleteRequest(DeleteRequestMessage deleteRequestMessage)
+        {
+            DeleteResponseMessage? deleteResponseMessage;
+            try
+            {
+                var result = await _contactsRepository.DeleteAsync(deleteRequestMessage.Id);
+
+                deleteResponseMessage = new DeleteResponseMessage(deleteRequestMessage.RequestMessageId, null, result ? StatusCode.Ok : StatusCode.NotFound);
+                
+                await _bus!.Reply(deleteResponseMessage);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.Message);
+                deleteResponseMessage = new DeleteResponseMessage(deleteRequestMessage.RequestMessageId, ex.Message, StatusCode.Error);
+                await _bus!.Reply(deleteResponseMessage);
             }
         }
 
