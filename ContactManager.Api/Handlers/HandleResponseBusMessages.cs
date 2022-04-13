@@ -8,22 +8,25 @@ namespace ContactManager.Api.Handlers
     /// </summary>
     public class HandleResponseBusMessages : IHandleResponseBusMessages
     {
-        private readonly ILogger<HandleResponseBusMessages> _logger;
         private readonly IMessageBus _messageBus;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="logger">Logger</param>
         /// <param name="messageBus">Message bus</param>
-        public HandleResponseBusMessages(ILogger<HandleResponseBusMessages> logger, IMessageBus messageBus)
+        public HandleResponseBusMessages(IMessageBus messageBus)
         {
-            _logger = logger;
             _messageBus = messageBus;
         }
 
         /// inheritdoc        
         public Task Handle(GetResponseMessage message)
+        {
+            return _messageBus.HandleResponse(message);
+        }
+
+        /// inheritdoc 
+        public Task Handle(CreateResponseMessage message)
         {
             return _messageBus.HandleResponse(message);
         }

@@ -6,7 +6,9 @@ namespace ContactManager.Api.Handlers
     /// <summary>
     /// Interface to handle response messages
     /// </summary>
-    public interface IHandleResponseBusMessages : IHandleMessages<GetResponseMessage>
+    public interface IHandleResponseBusMessages : 
+        IHandleMessages<GetResponseMessage>,
+        IHandleMessages<CreateResponseMessage>
     {
     }
 }

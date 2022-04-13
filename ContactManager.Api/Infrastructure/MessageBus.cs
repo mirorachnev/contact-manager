@@ -43,6 +43,7 @@ namespace ContactManager.Api.Infrastructure
                 .Start();
 
             _bus.Subscribe<GetResponseMessage>().Wait();
+            _bus.Subscribe<CreateResponseMessage>().Wait();
         }
 
         /// inheritdoc

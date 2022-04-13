@@ -86,6 +86,7 @@ namespace ContactManager.DataProvider.Infrastructure
                 await _contactsRepository.CreateAsync(dbContact);
 
                 createResponseMessage = new CreateResponseMessage(createRequestMessage.RequestMessageId, null, StatusCode.Ok);
+                await _bus!.Reply(createResponseMessage);
             }
             catch (Exception ex)
             {
