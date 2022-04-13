@@ -125,5 +125,33 @@ namespace ContactManager.Api.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="contact">Contact</param>
+        [HttpPut]
+        public async Task<IActionResult> Put(Contact contact)
+        {
+            if (contact == null)
+                return BadRequest();
+
+            var messageData = _mapper.Map<ContactData>(contact);
+
+            var updateRequestMessage = new UpdateRequestMessage(Guid.NewGuid(), Constants.ApiServiceReturnAddress, messageData);
+
+            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<UpdateResponseMessage>(updateRequestMessage);
+
+            if (response is null)
+                return new ObjectResult("Response was not received.") { StatusCode = StatusCodes.Status500InternalServerError };
+
+            if (response.StatusCode == MessageBus.Messages.DataTypes.Enums.StatusCode.Error)
+                return new ObjectResult(response.ErrorMessage) { StatusCode = StatusCodes.Status500InternalServerError };
+
+            if (response.StatusCode == MessageBus.Messages.DataTypes.Enums.StatusCode.NotFound)
+                return NotFound();
+
+            return Ok();
+        }
     }
 }

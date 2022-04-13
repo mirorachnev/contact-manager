@@ -72,9 +72,25 @@ namespace ContactManager.DataProvider.Repositories
         }
 
         /// inheritdoc
-        public Task Update(Contact contact)
+        public async Task<bool> UpdateAsync(Contact contact)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var dbContact = await _context.Contacts.FirstOrDefaultAsync(x => x.Id == contact.Id);
+
+                if (dbContact != null)
+                {
+                    _context.Contacts.Update(dbContact);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.Message);
+                throw;
+            }
         }
     }
 }

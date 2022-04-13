@@ -36,5 +36,11 @@ namespace ContactManager.Api.Handlers
         {
             return _messageBus.HandleResponse(message);
         }
+
+        /// inheritdoc
+        public Task Handle(UpdateResponseMessage message)
+        {
+            return _messageBus.HandleResponse(message);
+        }
     }
 }

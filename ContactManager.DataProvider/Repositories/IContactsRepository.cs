@@ -39,6 +39,6 @@ namespace ContactManager.DataProvider.Repositories
         /// </summary>
         /// <param name="contact">Contact entity</param>
         /// <returns></returns>
-        Task Update(Contact contact);
+        Task<bool> UpdateAsync(Contact contact);
     }
 }
