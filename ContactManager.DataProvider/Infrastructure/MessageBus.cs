@@ -8,11 +8,6 @@ using Microsoft.Extensions.Logging;
 using Rebus.Activation;
 using Rebus.Bus;
 using Rebus.Config;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ContactManager.DataProvider.Infrastructure
 {
@@ -75,45 +70,62 @@ namespace ContactManager.DataProvider.Infrastructure
             }
         }
 
-        private async Task HandleGetRequest(GetRequestMessage requestMessage)
+        private async Task HandleGetRequest(GetRequestMessage getRequestMessage)
         {
+            if (getRequestMessage.Id == null)
+            {
+                await HandleGetAllRequest(getRequestMessage);
+            }
+            else
+            {
+                await HandleGetByIdRequest(getRequestMessage);
+            }
+        }
+
+        private async Task HandleGetByIdRequest(GetRequestMessage getRequestMessage)
+        {
+            GetResponseMessage? responseMessage;
             try
             {
-                var result = new List<ContactData>();
-                GetResponseMessage? response = default;
+                var contact = await _contactsRepository.GetAsync((Guid)getRequestMessage.Id!);
 
-                switch (requestMessage.GetReuestType)
+                if (contact == null)
                 {
-                    case GetRequestType.ById:
-                        var contact = await _contactsRepository.GetAsync((Guid)requestMessage.Id!);
-
-                        if (contact == null)
-                        {
-                            response = new GetResponseMessage(requestMessage.RequestMessageId, null, StatusCode.NotFound, null);
-                        }
-                        else
-                        {
-                            result.Add(_mapper.Map<ContactData>(contact));
-                            response = new GetResponseMessage(requestMessage.RequestMessageId, null, StatusCode.Ok, result);
-                        }
-
-                        break;
-                    case GetRequestType.ByQuery:
-                        var contacts = await _contactsRepository.GetAsync(requestMessage.Query);
-                        result.AddRange(_mapper.Map<IEnumerable<ContactData>>(contacts));
-                        response = new GetResponseMessage(requestMessage.RequestMessageId, null, StatusCode.Ok, result);
-                        break;
-                    default:
-                        break;
+                    responseMessage = new GetResponseMessage(getRequestMessage.RequestMessageId, null, StatusCode.NotFound, null);                    
                 }
+                else
+                {
+                    var messageBusData = _mapper.Map<ContactData>(contact);
+                    responseMessage = new GetResponseMessage(getRequestMessage.RequestMessageId, null, StatusCode.Ok, new List<ContactData> { messageBusData });
+                }                
 
-                await _bus!.Reply(response);
+                await _bus!.Reply(responseMessage);
             }
             catch (Exception ex)
             {
                 _logger.LogWarning(ex.Message);
-                var response = new GetResponseMessage(requestMessage.RequestMessageId, ex.Message, StatusCode.Error, null);
-                await _bus!.Reply(response);
+                responseMessage = new GetResponseMessage(getRequestMessage.RequestMessageId, ex.Message, StatusCode.Error, null);
+                await _bus!.Reply(responseMessage);
+            }
+        }
+
+        private async Task HandleGetAllRequest(GetRequestMessage getRequestMessage)
+        {
+            GetResponseMessage? responseMessage;
+            try
+            {
+                var contacts = await _contactsRepository.GetAsync();
+
+                var contactsData = _mapper.Map<IEnumerable<ContactData>>(contacts);
+
+                responseMessage = new GetResponseMessage(getRequestMessage.RequestMessageId, null, StatusCode.Ok, contactsData);
+                await _bus!.Reply(responseMessage);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.Message);
+                responseMessage = new GetResponseMessage(getRequestMessage.RequestMessageId, ex.Message, StatusCode.Error, null);
+                await _bus!.Reply(responseMessage);
             }
         }
     }

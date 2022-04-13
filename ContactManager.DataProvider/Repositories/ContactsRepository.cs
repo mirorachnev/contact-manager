@@ -40,23 +40,9 @@ namespace ContactManager.DataProvider.Repositories
         }
 
         /// inheritdoc
-        public async Task<IEnumerable<Contact>> GetAsync(string? query)
+        public async Task<IEnumerable<Contact>> GetAsync()
         {
-            var result = _context.Contacts.AsQueryable();
-
-            if (!string.IsNullOrEmpty(query))
-            {
-                result = result
-                    .Where(x => 
-                        x.Email.Contains(query) ||
-                        x.FirstName.Contains(query) ||
-                        x.LastName.Contains(query) ||
-                        x.PhoneNumber.Contains(query) ||
-                        x.Iban.Contains(query)
-                    );
-            }
-
-            return await result.ToListAsync();
+            return await _context.Contacts.AsQueryable().ToListAsync();
         }
 
         /// inheritdoc

@@ -17,9 +17,8 @@ namespace ContactManager.DataProvider.Repositories
         /// <summary>
         /// Get by query
         /// </summary>
-        /// <param name="query">query</param>
         /// <returns></returns>
-        Task<IEnumerable<Contact>> GetAsync(string? query);
+        Task<IEnumerable<Contact>> GetAsync();
 
         /// <summary>
         /// Create new contact
