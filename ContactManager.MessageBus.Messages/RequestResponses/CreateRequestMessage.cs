@@ -6,7 +6,7 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
     /// <summary>
     /// Create request message
     /// </summary>
-    public class CreateRequestMessage : RequestMessageBase
+    public sealed class CreateRequestMessage : RequestMessageBase
     {
         /// <summary>
         /// Contact to be created

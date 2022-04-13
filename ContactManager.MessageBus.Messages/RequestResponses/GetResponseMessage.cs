@@ -8,7 +8,7 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
     /// <summary>
     /// Response to get request
     /// </summary>
-    public class GetResponseMessage : ResponseMessageBase
+    public sealed class GetResponseMessage : ResponseMessageBase
     {
         /// <summary>
         /// Contact data to be returned

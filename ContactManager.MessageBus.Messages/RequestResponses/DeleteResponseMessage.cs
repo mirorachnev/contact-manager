@@ -4,9 +4,9 @@ using System;
 namespace ContactManager.MessageBus.Messages.RequestResponses
 {
     /// <summary>
-    /// Create response message
+    /// Delete response message
     /// </summary>
-    public sealed class CreateResponseMessage : ResponseMessageBase
+    public sealed class DeleteResponseMessage : ResponseMessageBase
     {
         /// <summary>
         /// Constructor
@@ -14,10 +14,7 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
         /// <param name="requestMessageId">Id of request message</param>
         /// <param name="errorMessage">Error message, if error</param>
         /// <param name="statusCode">Status code of response</param>
-        public CreateResponseMessage(Guid requestMessageId, string? errorMessage, StatusCode statusCode)
-            : base(requestMessageId, errorMessage, statusCode)
-        {
-
-        }
+        public DeleteResponseMessage(Guid requestMessageId, string? errorMessage, StatusCode statusCode)
+            : base(requestMessageId, errorMessage, statusCode) { }
     }
 }
