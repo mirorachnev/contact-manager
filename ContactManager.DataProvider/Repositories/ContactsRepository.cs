@@ -22,9 +22,19 @@ namespace ContactManager.DataProvider.Repositories
         }
 
         /// inheritdoc
-        public Task Create(Contact contact)
+        public async Task CreateAsync(Contact contact)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Contacts.Add(contact);
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.Message);
+                throw;
+            }
         }
 
         /// inheritdoc

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ContactManager.Common;
+using ContactManager.DataProvider.DbData;
 using ContactManager.DataProvider.Repositories;
 using ContactManager.MessageBus.Messages.DataTypes;
 using ContactManager.MessageBus.Messages.DataTypes.Enums;
@@ -52,7 +53,9 @@ namespace ContactManager.DataProvider.Infrastructure
                 .Transport(t => t.UseRabbitMq(_connectionString, Constants.RabbitMqQueueName))
                 .Start();
 
+            // Subscribe to messages
             await _bus.Subscribe<GetRequestMessage>();
+            await _bus.Subscribe<CreateRequestMessage>();
         }
 
         /// <inheritdoc/>
@@ -67,6 +70,29 @@ namespace ContactManager.DataProvider.Infrastructure
             if (requestMessage is GetRequestMessage getRequestMessage)
             {
                 await HandleGetRequest(getRequestMessage);
+            }
+
+            if (requestMessage is CreateRequestMessage createRequestMessage)
+            {
+                await HandleCreateRequest(createRequestMessage);
+            }
+        }
+
+        private async Task HandleCreateRequest(CreateRequestMessage createRequestMessage)
+        {
+            CreateResponseMessage? createResponseMessage;
+            try
+            {
+                var dbContact = _mapper.Map<Contact>(createRequestMessage.ContactData);
+                await _contactsRepository.CreateAsync(dbContact);
+
+                createResponseMessage = new CreateResponseMessage(createRequestMessage.RequestMessageId, null, StatusCode.Ok);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.Message);
+                createResponseMessage = new CreateResponseMessage(createRequestMessage.RequestMessageId, ex.Message, StatusCode.Error);
+                await _bus!.Reply(createResponseMessage);
             }
         }
 

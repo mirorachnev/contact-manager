@@ -25,7 +25,7 @@ namespace ContactManager.DataProvider.Repositories
         /// </summary>
         /// <param name="contact">Contact entity</param>
         /// <returns></returns>
-        Task Create(Contact contact);
+        Task CreateAsync(Contact contact);
 
         /// <summary>
         /// Delete by id
