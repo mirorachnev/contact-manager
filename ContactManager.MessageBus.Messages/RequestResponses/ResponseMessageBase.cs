@@ -29,7 +29,7 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
         /// <param name="requestMessageId">Id of request message</param>
         /// <param name="errorMessage">Error message, if error</param>
         /// <param name="statusCode">Status code of response</param>
-        public ResponseMessageBase(Guid requestMessageId, string? errorMessage, StatusCode statusCode)
+        protected ResponseMessageBase(Guid requestMessageId, string? errorMessage, StatusCode statusCode)
         {
             RequestMessageId = requestMessageId;
             ErrorMessage = errorMessage;

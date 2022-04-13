@@ -38,7 +38,7 @@ namespace ContactManager.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var getRequestMessage = new GetRequestMessage(Guid.NewGuid(), Constants.ApiServiceReturnAddress, null);
+            var getRequestMessage = new GetRequestMessage(Guid.NewGuid(), null);
 
             var response = await _messageBus.PublishMessageAndWaitForResponseAsync<GetResponseMessage>(getRequestMessage);
 
@@ -59,7 +59,7 @@ namespace ContactManager.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var getRequestMessage = new GetRequestMessage(Guid.NewGuid(), Constants.ApiServiceReturnAddress, id);
+            var getRequestMessage = new GetRequestMessage(Guid.NewGuid(), id);
 
             var response = await _messageBus.PublishMessageAndWaitForResponseAsync<GetResponseMessage>(getRequestMessage);
 
@@ -90,7 +90,7 @@ namespace ContactManager.Api.Controllers
 
             var messageData = _mapper.Map<ContactData>(contact);
 
-            var createMessage = new CreateRequestMessage(Guid.NewGuid(), Constants.ApiServiceReturnAddress, messageData);
+            var createMessage = new CreateRequestMessage(Guid.NewGuid(), messageData);
 
             var response = await _messageBus.PublishMessageAndWaitForResponseAsync<CreateResponseMessage>(createMessage);
 
@@ -110,7 +110,7 @@ namespace ContactManager.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var deleteRequestMessage = new DeleteRequestMessage(Guid.NewGuid(), Constants.ApiServiceReturnAddress, id);
+            var deleteRequestMessage = new DeleteRequestMessage(Guid.NewGuid(), id);
 
             var response = await _messageBus.PublishMessageAndWaitForResponseAsync<DeleteResponseMessage>(deleteRequestMessage);
 
@@ -138,7 +138,7 @@ namespace ContactManager.Api.Controllers
 
             var messageData = _mapper.Map<ContactData>(contact);
 
-            var updateRequestMessage = new UpdateRequestMessage(Guid.NewGuid(), Constants.ApiServiceReturnAddress, messageData);
+            var updateRequestMessage = new UpdateRequestMessage(Guid.NewGuid(), messageData);
 
             var response = await _messageBus.PublishMessageAndWaitForResponseAsync<UpdateResponseMessage>(updateRequestMessage);
 

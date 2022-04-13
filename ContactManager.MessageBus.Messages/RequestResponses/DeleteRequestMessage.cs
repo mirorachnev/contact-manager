@@ -16,10 +16,9 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
         /// Constructor
         /// </summary>
         /// <param name="requestMessageId">Request message id</param>
-        /// <param name="returnAddress">Return address</param>
         /// <param name="id">Id</param>
-        public DeleteRequestMessage(Guid requestMessageId, string returnAddress, Guid id)
-            : base(requestMessageId, returnAddress)
+        public DeleteRequestMessage(Guid requestMessageId, Guid id)
+            : base(requestMessageId)
         {
             Id = id;
         }

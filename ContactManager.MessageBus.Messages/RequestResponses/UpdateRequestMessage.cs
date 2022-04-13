@@ -17,11 +17,9 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
         /// Constructor
         /// </summary>
         /// <param name="requestMessageId">Request message id</param>
-        /// <param name="returnAddress">Return address</param>
         /// <param name="contactData">Contact</param>
-        public UpdateRequestMessage(Guid requestMessageId, string returnAddress,
-            ContactData contactData)
-            : base(requestMessageId, returnAddress)
+        public UpdateRequestMessage(Guid requestMessageId, ContactData contactData)
+            : base(requestMessageId)
         {
             ContactData = contactData;
         }

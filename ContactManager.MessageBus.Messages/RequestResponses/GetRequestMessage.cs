@@ -17,10 +17,9 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
         /// Constructor
         /// </summary>
         /// <param name="requestMessageId">Id of request message</param>
-        /// <param name="returnAddress">Return address</param>
         /// <param name="id">Id</param>
-        public GetRequestMessage(Guid requestMessageId, string returnAddress, Guid? id)
-            : base(requestMessageId, returnAddress)
+        public GetRequestMessage(Guid requestMessageId, Guid? id)
+            : base(requestMessageId)
         {                        
             Id = id;
         }

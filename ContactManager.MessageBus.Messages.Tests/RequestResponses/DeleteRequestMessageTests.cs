@@ -2,11 +2,15 @@
 using FluentAssertions;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ContactManager.MessageBus.Messages.Tests.RequestResponses
 {
-    public class GetRequestMessageTests
+    public class DeleteRequestMessageTests
     {
         [Fact]
         public void ConstructorTest()
@@ -14,10 +18,10 @@ namespace ContactManager.MessageBus.Messages.Tests.RequestResponses
             var requestMessageId = Guid.NewGuid();
             var id = Guid.NewGuid();
 
-            var getRequestMessage = new GetRequestMessage(requestMessageId, id);
+            var deleteRequestMessage = new DeleteRequestMessage(requestMessageId, id);
 
-            getRequestMessage.RequestMessageId.Should().Be(requestMessageId);
-            getRequestMessage.Id.Should().Be(id);
+            deleteRequestMessage.RequestMessageId.Should().Be(requestMessageId);
+            deleteRequestMessage.Id.Should().Be(id);
         }
 
         [Fact]
@@ -26,10 +30,10 @@ namespace ContactManager.MessageBus.Messages.Tests.RequestResponses
             var requestMessageId = Guid.NewGuid();
             var id = Guid.NewGuid();
 
-            var getRequestMessage = new GetRequestMessage(requestMessageId, id);
-            var json = JsonConvert.SerializeObject(getRequestMessage);
+            var deleteRequestMessage = new DeleteRequestMessage(requestMessageId, id);
+            var json = JsonConvert.SerializeObject(deleteRequestMessage);
 
-            var response = JsonConvert.DeserializeObject<GetRequestMessage>(json);
+            var response = JsonConvert.DeserializeObject<DeleteRequestMessage>(json);
 
             response.RequestMessageId.Should().Be(requestMessageId);
             response.Id.Should().Be(id);

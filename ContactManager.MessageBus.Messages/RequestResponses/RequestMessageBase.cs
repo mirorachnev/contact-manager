@@ -13,19 +13,12 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
         public Guid RequestMessageId { get; }
 
         /// <summary>
-        /// Return address
-        /// </summary>
-        public string ReturnAddres { get; }
-
-        /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="requestMessageId">Id of request message</param>
-        /// <param name="returnAddress">Return address</param>
-        public RequestMessageBase(Guid requestMessageId, string returnAddress)
+        protected RequestMessageBase(Guid requestMessageId)
         {
             RequestMessageId = requestMessageId;
-            ReturnAddres = returnAddress;
         }
     }
 }

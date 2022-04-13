@@ -13,8 +13,5 @@
 
         // Database connection 
         public const string ContactManagerDbConnectionStringName = "ContactManagerDbConnectionString";
-
-        // Api service return address
-        public const string ApiServiceReturnAddress = "ApiServiceReturnAddress";
     }
 }
