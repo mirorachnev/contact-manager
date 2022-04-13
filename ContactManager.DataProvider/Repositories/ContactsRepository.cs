@@ -46,13 +46,13 @@ namespace ContactManager.DataProvider.Repositories
         /// inheritdoc
         public async Task<Contact?> GetAsync(Guid id)
         {
-            return await _context.Contacts.AsQueryable().FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Contacts.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         /// inheritdoc
         public async Task<IEnumerable<Contact>> GetAsync()
         {
-            return await _context.Contacts.AsQueryable().ToListAsync();
+            return await _context.Contacts.ToListAsync();
         }
 
         /// inheritdoc

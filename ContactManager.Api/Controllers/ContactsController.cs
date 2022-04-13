@@ -72,7 +72,7 @@ namespace ContactManager.Api.Controllers
             if (!response.Contacts!.Any())
                 return NotFound();
 
-            var result = _mapper.Map<IEnumerable<Contact>>(response.Contacts?.FirstOrDefault());
+            var result = _mapper.Map<Contact>(response.Contacts?.FirstOrDefault());
 
             return Ok(result);
         }

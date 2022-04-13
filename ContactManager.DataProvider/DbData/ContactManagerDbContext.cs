@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 #nullable disable
 
@@ -25,7 +24,7 @@ namespace ContactManager.DataProvider.DbData
         /// <summary>
         /// Contacts
         /// </summary>
-        public ICollection<Contact> Contacts { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
 
         /// <summary>
         /// On model creating
