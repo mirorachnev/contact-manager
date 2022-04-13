@@ -19,7 +19,6 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
         /// <param name="requestMessageId">Id of request message</param>
         /// <param name="returnAddress">Return address</param>
         /// <param name="id">Id</param>
-        /// <exception cref="ArgumentException"></exception>
         public GetRequestMessage(Guid requestMessageId, string returnAddress, Guid? id)
             : base(requestMessageId, returnAddress)
         {                        

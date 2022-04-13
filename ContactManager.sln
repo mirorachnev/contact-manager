@@ -16,6 +16,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.DataProvider
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Api", "ContactManager.Api\ContactManager.Api.csproj", "{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.MessageBus.Messages.Tests", "ContactManager.MessageBus.Messages.Tests\ContactManager.MessageBus.Messages.Tests.csproj", "{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
