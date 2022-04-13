@@ -24,13 +24,12 @@ namespace ContactManager.Api.Controllers
         /// </summary>
         /// <param name="logger">Logger</param>
         /// <param name="messageBus">Message bus</param>
-        /// <param name="mapper">Automapper</param>
         public ContactsController(ILogger<ContactsController> logger,
-            IMessageBus messageBus, IMapper mapper)
+            IMessageBus messageBus)
         {
             _logger = logger;
             _messageBus = messageBus;
-            _mapper = mapper;
+            _mapper = Utilities.AutoMapper.GetMapper();
         }
 
         /// <summary>

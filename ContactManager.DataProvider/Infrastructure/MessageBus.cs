@@ -28,14 +28,13 @@ namespace ContactManager.DataProvider.Infrastructure
         /// Constructor
         /// </summary>
         /// <param name="logger">Logger</param>
-        /// <param name="mapper">Automapper</param>
         /// <param name="contactsRepository">Contacts repository</param>
-        public MessageBus(ILogger<MessageBus> logger, IMapper mapper, IContactsRepository contactsRepository)
+        public MessageBus(ILogger<MessageBus> logger, IContactsRepository contactsRepository)
         {
             _contactsRepository = contactsRepository;
             _logger = logger;
             _connectionString = Constants.RabbitMqConnectionString;
-            _mapper = mapper;
+            _mapper = Utilities.AutoMapper.GetMapper();
 
             _activator = new BuiltinHandlerActivator();
             _activator.Handle<RequestMessageBase>(x => HandleRequest(x));
