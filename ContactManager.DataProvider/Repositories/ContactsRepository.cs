@@ -80,7 +80,14 @@ namespace ContactManager.DataProvider.Repositories
 
                 if (dbContact != null)
                 {
-                    _context.Contacts.Update(dbContact);
+                    dbContact.FirstName = contact.FirstName;
+                    dbContact.LastName = contact.LastName;
+                    dbContact.Email = contact.Email;
+                    dbContact.PhoneNumber = contact.PhoneNumber;
+                    dbContact.DateOfBirth = contact.DateOfBirth;
+                    dbContact.Address = contact.Address;
+                    dbContact.Iban = contact.Iban;
+
                     await _context.SaveChangesAsync();
                     return true;
                 }
