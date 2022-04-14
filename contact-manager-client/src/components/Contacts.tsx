@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import { Button, ButtonToolbar, Table } from 'react-bootstrap';
 import { Contact } from '../models/contact';
+import { AddEditContact } from './AddEditContact';
 import contactsService from '../services/contactsService';
 
 export class Contacts extends Component {
-  state: { contacts: Contact[], addModalShow: boolean, editModalShow: boolean };
+  state: { contacts: Contact[], addEditModalShow: boolean, contact: Contact };
 
   constructor(props: {} | Readonly<{}>) {
     super(props);
-    this.state = { contacts: [], addModalShow: false, editModalShow: false};
+    this.state = {
+      contacts: [],
+      addEditModalShow: false,
+      contact: {
+        firstName: '',
+        lastName: '',
+        address: '',
+        phoneNumber: '',
+        dateOfBirth: '',
+        email: '',
+        id: '',
+        iban: ''}
+    };
   }
 
   getContacts = async () => {
@@ -30,8 +43,9 @@ export class Contacts extends Component {
   }
 
   render() {
+
     return (
-      <div >
+      <>
         <Table className="mt-4" striped bordered hover size="sm">
           <thead>
             <tr>
@@ -56,7 +70,8 @@ export class Contacts extends Component {
                 <td>{contact.iban}</td>
                 <td>
                   <ButtonToolbar>
-                    <Button className="mr-2" variant="info">
+                    <Button className="mr-2" variant="info"
+                      onClick={() => this.setState({contact: contact, addEditModalShow: true})}>
                       
                       Edit
                     </Button>
@@ -77,12 +92,28 @@ export class Contacts extends Component {
         </Table>
 
         <ButtonToolbar>
-          <Button variant='primary'>
+          <Button variant='primary'
+            onClick={() => { this.setState({ addEditModalShow: true }); }}>
             Add Contact</Button>
 
-          
+          <AddEditContact
+            show={this.state.addEditModalShow}
+            isedit={false} contact={(
+              {
+                firstName: '',
+                lastName: '',
+                address: '',
+                phoneNumber: '',
+                dateOfBirth: '',
+                email: '',
+                id: '',
+                iban: ''
+              })}
+            onHide={() => this.setState({ addEditModalShow: false })} />
         </ButtonToolbar>
-      </div>
+
+        
+      </>
     )
   }
 }
