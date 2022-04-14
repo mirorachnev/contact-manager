@@ -7,6 +7,14 @@ builder.Logging.AddConsole();
 
 // Add services to the container.
 
+var devCorsPolicy = "devCorsPolicy";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(devCorsPolicy, builder => {
+        builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 builder.Services.AddSingleton<IMessageBus, MessageBus>();
 builder.Services.AddSingleton<IHandleResponseBusMessages, HandleResponseBusMessages>();
 
@@ -17,6 +25,8 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseCors(devCorsPolicy);
 
 app.UseAuthorization();
 
