@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ContactManager.Api.Contracts;
 using ContactManager.Api.Infrastructure;
-using ContactManager.Common;
 using ContactManager.MessageBus.Messages.DataTypes;
 using ContactManager.MessageBus.Messages.RequestResponses;
 using Microsoft.AspNetCore.Mvc;
