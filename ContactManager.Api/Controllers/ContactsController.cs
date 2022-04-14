@@ -83,7 +83,7 @@ namespace ContactManager.Api.Controllers
         /// <param name="contact">Contact</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Post(Contact contact)
+        public async Task<IActionResult> Post(ContactBase contact)
         {
             if (contact == null)
                 return BadRequest();

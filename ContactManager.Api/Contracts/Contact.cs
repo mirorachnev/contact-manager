@@ -3,47 +3,12 @@
     /// <summary>
     /// Contact
     /// </summary>
-    public class Contact
+    public class Contact : ContactBase
     {
         /// <summary>
         /// Id to be exposed
         /// </summary>
-        public Guid Id { get; }
-
-        /// <summary>
-        /// First name
-        /// </summary>
-        public string FirstName { get; }
-
-        /// <summary>
-        /// Last name
-        /// </summary>
-        public string LastName { get; }
-
-        /// <summary>
-        /// Email
-        /// </summary>
-        public string Email { get; }
-
-        /// <summary>
-        /// Phone number
-        /// </summary>
-        public string PhoneNumber { get; }
-
-        /// <summary>
-        /// Date of Birth
-        /// </summary>
-        public DateTime DateOfBirth { get; }
-
-        /// <summary>
-        /// Address
-        /// </summary>
-        public string Address { get; }
-
-        /// <summary>
-        /// IBAN
-        /// </summary>
-        public string Iban { get; }
+        public Guid Id { get; }        
 
         /// <summary>
         /// Constructor
@@ -58,15 +23,9 @@
         /// <param name="iban">IBAN</param>
         public Contact(Guid id, string firstName, string lastName, string email,
             string phoneNumber, DateTime dateOfBirth, string address, string iban)
+            : base(firstName, lastName, email, phoneNumber, dateOfBirth, address, iban)
         {
             Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            PhoneNumber = phoneNumber;
-            DateOfBirth = dateOfBirth;
-            Address = address;
-            Iban = iban;
         }
     }
 }

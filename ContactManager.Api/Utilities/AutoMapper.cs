@@ -38,6 +38,9 @@ namespace ContactManager.Api.Utilities
                 cfg.AllowNullDestinationValues = true;
 
                 cfg.CreateMap<Contact, ContactData>().ReverseMap();
+
+                cfg.CreateMap<ContactBase, ContactData>()
+                .ForCtorParam("id", opt => opt.MapFrom(src => Guid.NewGuid()));
             });
 
             _autoMapper = config.CreateMapper();
