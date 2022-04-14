@@ -15,6 +15,20 @@ class ContactsService {
 
     return result;
   }
+
+  getContact = async (id: string): Promise<Contact> => {
+    const response = await fetch(`${this.APP_API_URL}/${id}`);
+
+    const result = await response.json();
+
+    return result;
+  }
+
+  deleteContact = async (id: string): Promise<void> => {
+    await fetch(`${this.APP_API_URL}/${id}`, {
+      method: "DELETE"
+    })
+  }
 }
 
 export default new ContactsService();
