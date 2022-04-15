@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
 import { Button, ButtonToolbar, Table } from 'react-bootstrap';
 import { Contact } from '../models/contact';
-import { AddEditContact } from './AddEditContact';
+import { AddContact } from './AddContact';
 import contactsService from '../services/contactsService';
 
 export class Contacts extends Component {
-  state: { contacts: Contact[], addEditModalShow: boolean, contact: Contact };
+  state: { contacts: Contact[], addModalShow: boolean, editModalShow: boolean };
 
   constructor(props: {} | Readonly<{}>) {
     super(props);
     this.state = {
       contacts: [],
-      addEditModalShow: false,
-      contact: {
-        firstName: '',
-        lastName: '',
-        address: '',
-        phoneNumber: '',
-        dateOfBirth: '',
-        email: '',
-        id: '',
-        iban: ''}
+      addModalShow: false,
+      editModalShow: false
     };
   }
 
@@ -96,24 +88,12 @@ export class Contacts extends Component {
             onClick={() => { this.setState({ addEditModalShow: true }); }}>
             Add Contact</Button>
 
-          <AddEditContact
-            show={this.state.addEditModalShow}
-            isedit={false} contact={(
-              {
-                firstName: '',
-                lastName: '',
-                address: '',
-                phoneNumber: '',
-                dateOfBirth: '',
-                email: '',
-                id: '',
-                iban: ''
-              })}
+          <AddContact
+            show={this.state.addModalShow}            
             onHide={() => this.setState({ addEditModalShow: false })}
             reloadData={() => this.getContacts()}
           />
         </ButtonToolbar>
-
         
       </>
     )

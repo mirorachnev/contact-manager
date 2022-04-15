@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Button, ButtonToolbar, Col, Form, Modal, Row, Table } from 'react-bootstrap';
-import { ActionModelDialogProps } from '../models/addEditModel';
+import { ActionModelDialogProps } from '../models/actionModel';
 import contactsService from '../services/contactsService';
 import { Contact } from '../models/contact';
 
-export class AddEditContact extends Component<ActionModelDialogProps> {  
+export class AddContact extends Component<ActionModelDialogProps> {  
 
   constructor(props: ActionModelDialogProps) {
     super(props);   
@@ -41,7 +41,7 @@ export class AddEditContact extends Component<ActionModelDialogProps> {
       >
         <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              {this.props.isedit ? "Edit " : "Add"} Contact
+              Add Contact
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
