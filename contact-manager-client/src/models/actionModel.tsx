@@ -2,5 +2,6 @@
 export type ActionModelDialogProps = {  
   onHide: () => void,
   show: boolean,
-  reloadData: () => void
+  reloadData: () => void,
+  id: string
 }

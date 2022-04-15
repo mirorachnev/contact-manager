@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import { Home } from './components/Home';
-import { Contacts } from './components/Contacts';
+import { ContactList } from './components/ContactList';
 import { Navigation } from './components/Navigation';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -19,7 +19,7 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/contacts' element={<Contacts />} />
+          <Route path='/contacts' element={<ContactList />} />
         </Routes>
       </div>
     </BrowserRouter>

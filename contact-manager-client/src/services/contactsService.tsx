@@ -40,6 +40,17 @@ class ContactsService {
       body: JSON.stringify(contact)
     })
   }
+
+  updateContact = async (contact: Contact): Promise<void> => {
+    await fetch(this.APP_API_URL, {
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(contact)
+    })
+  }
 }
 
 export default new ContactsService();

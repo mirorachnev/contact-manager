@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Button, ButtonToolbar, Table } from 'react-bootstrap';
 import { Contact } from '../models/contact';
 import { AddContact } from './AddContact';
+import { EditContact } from './EditContact';
 import contactsService from '../services/contactsService';
 
-export class Contacts extends Component {
+export class ContactList extends Component {
   state: { contacts: Contact[], addModalShow: boolean, editModalShow: boolean };
 
   constructor(props: {} | Readonly<{}>) {
@@ -63,10 +64,17 @@ export class Contacts extends Component {
                 <td>
                   <ButtonToolbar>
                     <Button className="mr-2" variant="info"
-                      onClick={() => this.setState({contact: contact, addEditModalShow: true})}>
+                      onClick={() => this.setState({ editModalShow: true})}>
                       
                       Edit
                     </Button>
+
+                    <EditContact
+                      show={this.state.editModalShow}
+                      onHide={() => this.setState({ editModalShow: false })}
+                      reloadData={() => this.getContacts()}
+                      id={contact.id}
+                    />
 
                     <Button className="mr-2" variant="danger"
                       onClick={() => this.deleteContact(contact.id)}>
@@ -85,14 +93,16 @@ export class Contacts extends Component {
 
         <ButtonToolbar>
           <Button variant='primary'
-            onClick={() => { this.setState({ addEditModalShow: true }); }}>
+            onClick={() => { this.setState({ addModalShow: true }); }}>
             Add Contact</Button>
 
           <AddContact
-            show={this.state.addModalShow}            
-            onHide={() => this.setState({ addEditModalShow: false })}
+            show={this.state.addModalShow}
+            onHide={() => this.setState({ addModalShow: false })}
             reloadData={() => this.getContacts()}
+            id={''}
           />
+          
         </ButtonToolbar>
         
       </>
