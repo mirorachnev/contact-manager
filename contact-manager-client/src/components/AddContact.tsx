@@ -70,7 +70,7 @@ export class AddContact extends Component<ActionModelDialogProps> {
               </Form.Group>
               <Form.Group>
                 <Form.Label>Date of Birth</Form.Label>
-                <Form.Control type="text" name="DateOfBirth" required
+                <Form.Control type="date" name="DateOfBirth" required
                   placeholder="Date of Birth" />
               </Form.Group>
               <Form.Group>
