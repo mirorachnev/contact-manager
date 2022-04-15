@@ -71,6 +71,7 @@ export class AddContact extends Component<ActionModelDialogProps> {
               <Form.Group>
                 <Form.Label>Date of Birth</Form.Label>
                 <Form.Control type="date" name="DateOfBirth" required
+                  defaultValue={new Date().toISOString().split('T')[0]}
                   placeholder="Date of Birth" />
               </Form.Group>
               <Form.Group>

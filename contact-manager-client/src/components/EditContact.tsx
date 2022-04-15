@@ -75,7 +75,7 @@ export class EditContact extends Component<ActionModelDialogProps> {
               <Form.Group>
                 <Form.Label>Date of Birth</Form.Label>
                 <Form.Control type="date" name="DateOfBirth" required
-                  defaultValue={this.props.contact?.dateOfBirth}
+                  defaultValue={this.props.contact?.dateOfBirth.split('T')[0]}
                   placeholder="Date of Birth" />
               </Form.Group>
               <Form.Group>
