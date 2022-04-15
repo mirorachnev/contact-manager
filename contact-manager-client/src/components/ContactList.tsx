@@ -6,14 +6,24 @@ import { EditContact } from './EditContact';
 import contactsService from '../services/contactsService';
 
 export class ContactList extends Component {
-  state: { contacts: Contact[], addModalShow: boolean, editModalShow: boolean };
+  state: { contacts: Contact[], addModalShow: boolean, editModalShow: boolean, contact: Contact };
 
   constructor(props: {} | Readonly<{}>) {
     super(props);
     this.state = {
       contacts: [],
       addModalShow: false,
-      editModalShow: false
+      editModalShow: false,
+      contact: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        address: '',
+        dateOfBirth: '',
+        iban: '',
+        id: ''
+      }
     };
   }
 
@@ -64,17 +74,10 @@ export class ContactList extends Component {
                 <td>
                   <ButtonToolbar>
                     <Button className="mr-2" variant="info"
-                      onClick={() => this.setState({ editModalShow: true})}>
+                      onClick={() => this.setState({ editModalShow: true, contact: contact })}>
                       
                       Edit
-                    </Button>
-
-                    <EditContact
-                      show={this.state.editModalShow}
-                      onHide={() => this.setState({ editModalShow: false })}
-                      reloadData={() => this.getContacts()}
-                      contact={contact}
-                    />
+                    </Button>                    
 
                     <Button className="mr-2" variant="danger"
                       onClick={() => this.deleteContact(contact.id)}>
@@ -94,15 +97,22 @@ export class ContactList extends Component {
         <ButtonToolbar>
           <Button variant='primary'
             onClick={() => { this.setState({ addModalShow: true }); }}>
-            Add Contact</Button>
-
-          <AddContact
-            show={this.state.addModalShow}
-            onHide={() => this.setState({ addModalShow: false })}
-            reloadData={() => this.getContacts()}
-          />
+            Add Contact</Button>          
           
         </ButtonToolbar>
+
+        <AddContact
+          show={this.state.addModalShow}
+          onHide={() => this.setState({ addModalShow: false })}
+          reloadData={() => this.getContacts()}
+        />
+
+        <EditContact
+          show={this.state.editModalShow}
+          onHide={() => this.setState({ editModalShow: false })}
+          reloadData={() => this.getContacts()}
+          contact={this.state.contact}
+        />
         
       </>
     )
