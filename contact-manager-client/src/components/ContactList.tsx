@@ -73,7 +73,7 @@ export class ContactList extends Component {
                       show={this.state.editModalShow}
                       onHide={() => this.setState({ editModalShow: false })}
                       reloadData={() => this.getContacts()}
-                      id={contact.id}
+                      contact={contact}
                     />
 
                     <Button className="mr-2" variant="danger"
@@ -100,7 +100,6 @@ export class ContactList extends Component {
             show={this.state.addModalShow}
             onHide={() => this.setState({ addModalShow: false })}
             reloadData={() => this.getContacts()}
-            id={''}
           />
           
         </ButtonToolbar>

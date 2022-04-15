@@ -1,7 +1,8 @@
+import { Contact } from "./contact";
 
 export type ActionModelDialogProps = {  
   onHide: () => void,
   show: boolean,
   reloadData: () => void,
-  id: string
+  contact?: Contact
 }
