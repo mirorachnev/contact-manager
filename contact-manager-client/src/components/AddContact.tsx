@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonToolbar, Col, Form, Modal, Row, Table } from 'react-bootstrap';
+import { Button, Form, Modal, } from 'react-bootstrap';
 import { ActionModelDialogProps } from '../models/actionModel';
 import contactsService from '../services/contactsService';
 import { Contact } from '../models/contact';

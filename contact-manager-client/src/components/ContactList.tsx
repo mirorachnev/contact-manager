@@ -59,6 +59,7 @@ export class ContactList extends Component {
               <th>Date of Birth</th>
               <th>Address</th>
               <th>IBAN</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

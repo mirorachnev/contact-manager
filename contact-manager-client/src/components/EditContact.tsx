@@ -6,12 +6,8 @@ import { Contact } from '../models/contact';
 
 export class EditContact extends Component<ActionModelDialogProps> {
 
-  //state: { id: string, contact: Contact };
-
   constructor(props: ActionModelDialogProps) {
-    super(props);
-
-    
+    super(props);    
   }
 
   handleOnSubmit = async (ev: any) => {
