@@ -69,7 +69,7 @@ export class ContactList extends Component {
                 <td>{contact.lastName}</td>
                 <td>{contact.email}</td>
                 <td>{contact.phoneNumber}</td>
-                <td>{contact.dateOfBirth}</td>
+                <td>{new Date(contact.dateOfBirth).toLocaleDateString()}</td>
                 <td>{contact.address}</td>
                 <td>{contact.iban}</td>
                 <td>
