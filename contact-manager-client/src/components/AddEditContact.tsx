@@ -1,12 +1,33 @@
 import React, { Component } from 'react';
 import { Button, ButtonToolbar, Col, Form, Modal, Row, Table } from 'react-bootstrap';
 import { ActionModelDialogProps } from '../models/addEditModel';
+import contactsService from '../services/contactsService';
 import { Contact } from '../models/contact';
 
 export class AddEditContact extends Component<ActionModelDialogProps> {  
 
   constructor(props: ActionModelDialogProps) {
     super(props);   
+  }
+
+  handleOnSubmit = async (ev: any) => {
+
+    ev.preventDefault();
+    const contact: Contact = {
+      firstName: ev.target.FirstName.value,
+      lastName: ev.target.LastName.value,
+      email: ev.target.Email.value,
+      phoneNumber: ev.target.PhoneNumber.value,
+      address: ev.target.Address.value,
+      dateOfBirth: ev.target.DateOfBirth.value,
+      iban: ev.target.Iban.value,
+      id: ''
+    };
+
+    await contactsService.createContact(contact);
+
+    this.props.reloadData();
+    this.props.onHide();
   }
 
   render() {
@@ -25,47 +46,50 @@ export class AddEditContact extends Component<ActionModelDialogProps> {
         </Modal.Header>
         <Modal.Body>
 
-          <Row>
-            <Col sm={6}>
-              <Form>
-                <Form.Group controlId="Contact">
-                  <Form.Label>Contact</Form.Label>
-                    <Form.Control type="text" name="FirstName" required
-                      placeholder="First Name" value={this.props.contact.firstName} />
-
-                    <Form.Control type="text" name="LastName" required
-                      placeholder="Last Name" value={this.props.contact.lastName} />
-
-                    <Form.Control type="text" name="Email" required
-                      placeholder="Email" value={this.props.contact.email} />
-
-                    <Form.Control type="text" name="PhoneNumber" required
-                      placeholder="Phone Number" value={this.props.contact.phoneNumber} />
-
-                    <Form.Control type="text" name="DateOfBirth" required
-                      placeholder="Date of Birth" value={this.props.contact.dateOfBirth} />
-
-                    <Form.Control type="text" name="Address" required
-                      placeholder="Address" value={this.props.contact.address} />
-
-                    <Form.Control type="text" name="Iban" required
-                      placeholder="Iban" value={this.props.contact.iban} />
-                </Form.Group>
-
-                
-
-                
-
+            <Form onSubmit={(e) => this.handleOnSubmit(e)}>
                 <Form.Group>
-                  <Button variant="primary" type="submit">
-                    Add Contact
+                <Form.Label>First Name</Form.Label>
+                    <Form.Control type="text" name="FirstName" required
+                      placeholder="First Name" />
+              </Form.Group>
+                   
+              <Form.Group>
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control type="text" name="LastName" required
+                  placeholder="Last Name" />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="text" name="Email" required
+                  placeholder="Email" />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Phone Number</Form.Label>
+                <Form.Control type="text" name="PhoneNumber" required
+                  placeholder="Phone Number" />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Date of Birth</Form.Label>
+                <Form.Control type="text" name="DateOfBirth" required
+                  placeholder="Date of Birth" />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Address</Form.Label>
+                <Form.Control type="text" name="Address" required
+                  placeholder="Address" />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>IBAN</Form.Label>
+                <Form.Control type="text" name="Iban" required
+                  placeholder="Iban" />
+              </Form.Group>
+              <Form.Group>
+                <Button variant="primary" type="submit">
+                    Save
                   </Button>
                 </Form.Group>
               </Form>
-            </Col>
-
             
-          </Row>
         </Modal.Body>
 
           <Modal.Footer>

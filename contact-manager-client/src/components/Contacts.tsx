@@ -109,7 +109,9 @@ export class Contacts extends Component {
                 id: '',
                 iban: ''
               })}
-            onHide={() => this.setState({ addEditModalShow: false })} />
+            onHide={() => this.setState({ addEditModalShow: false })}
+            reloadData={() => this.getContacts()}
+          />
         </ButtonToolbar>
 
         

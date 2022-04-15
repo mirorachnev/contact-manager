@@ -4,5 +4,6 @@ export type ActionModelDialogProps = {
   onHide: () => void,
   show: boolean,
   isedit: boolean,
-  contact: Contact
+  contact: Contact,
+  reloadData: () => void
 }
