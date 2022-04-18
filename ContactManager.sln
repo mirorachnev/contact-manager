@@ -14,9 +14,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.Common", "Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.DataProvider", "ContactManager.DataProvider\ContactManager.DataProvider.csproj", "{9C82EF0C-E26D-4AD4-9C12-96D8E06F451A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Api", "ContactManager.Api\ContactManager.Api.csproj", "{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.Api", "ContactManager.Api\ContactManager.Api.csproj", "{03A2DA2A-AB3C-47A6-8EE9-F4B430C5DD27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.MessageBus.Messages.Tests", "ContactManager.MessageBus.Messages.Tests\ContactManager.MessageBus.Messages.Tests.csproj", "{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.MessageBus.Messages.Tests", "ContactManager.MessageBus.Messages.Tests\ContactManager.MessageBus.Messages.Tests.csproj", "{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Api.Tests", "ContactManager.Api.Tests\ContactManager.Api.Tests.csproj", "{032AF30B-90F7-414D-8A33-FA11D5F7DFAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{032AF30B-90F7-414D-8A33-FA11D5F7DFAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{032AF30B-90F7-414D-8A33-FA11D5F7DFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{032AF30B-90F7-414D-8A33-FA11D5F7DFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{032AF30B-90F7-414D-8A33-FA11D5F7DFAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

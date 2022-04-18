@@ -14,19 +14,15 @@ namespace ContactManager.Api.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
-        private readonly ILogger<ContactsController> _logger;
         private readonly IMessageBus _messageBus;
         private readonly IMapper _mapper;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="logger">Logger</param>
         /// <param name="messageBus">Message bus</param>
-        public ContactsController(ILogger<ContactsController> logger,
-            IMessageBus messageBus)
+        public ContactsController(IMessageBus messageBus)
         {
-            _logger = logger;
             _messageBus = messageBus;
             _mapper = Utilities.AutoMapper.GetMapper();
         }
