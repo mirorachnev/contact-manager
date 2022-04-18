@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="container">
       <h3 className="m-3 d-flex justify-content-center">
-        Contact List
+        Contact Manager
       </h3>
 
       <br />
