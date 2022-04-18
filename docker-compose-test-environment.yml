@@ -1,0 +1,28 @@
+# docker-compose file that creates an environment for testing on your local PC.
+#
+# Use this command to run docker compose setup:
+# docker-compose -f docker-compose-test-environment.yml up 
+
+services:
+  mssqlexpress:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=EaGlesR4u!
+      - MSSQL_PID=Express
+    ports:
+      - 1433:1433
+
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - 15672:15672
+      - 5672:5672
+  
+    depends_on:
+      - rabbitmq
+      - mssqlexpress

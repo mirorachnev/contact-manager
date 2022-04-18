@@ -5,6 +5,7 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{839BA2CE-493B-4BA2-9FCF-BC8032B279B6}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose-test-environment.yml = docker-compose-test-environment.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -18,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.Api", "Conta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.MessageBus.Messages.Tests", "ContactManager.MessageBus.Messages.Tests\ContactManager.MessageBus.Messages.Tests.csproj", "{208507DA-C6A0-4A88-8DD7-6CDBB7CAF740}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Api.Tests", "ContactManager.Api.Tests\ContactManager.Api.Tests.csproj", "{032AF30B-90F7-414D-8A33-FA11D5F7DFAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactManager.Api.Tests", "ContactManager.Api.Tests\ContactManager.Api.Tests.csproj", "{032AF30B-90F7-414D-8A33-FA11D5F7DFAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
