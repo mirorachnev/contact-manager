@@ -13,7 +13,9 @@ namespace ContactManager.Api.Infrastructure
         /// <typeparam name="TMessage">Response message</typeparam>
         /// <param name="requestMessage">Request message</param>
         /// <returns>Response</returns>
-        Task<TMessage> PublishMessageAndWaitForResponseAsync<TMessage>(RequestMessageBase requestMessage) where TMessage : ResponseMessageBase;
+        Task<TResponseMessage?> PublishMessageAndWaitForResponseAsync<TRequestMessage, TResponseMessage>(TRequestMessage requestMessage) 
+            where TRequestMessage : RequestMessageBase
+            where TResponseMessage: ResponseMessageBase;
 
         /// <summary>
         /// Handles response

@@ -72,11 +72,13 @@ namespace ContactManager.Api.Infrastructure
         }
 
         /// inheritdoc
-        public async Task<TResponse> PublishMessageAndWaitForResponseAsync<TResponse>(RequestMessageBase requestMessage) where TResponse : ResponseMessageBase
+        public async Task<TResponseMessage?> PublishMessageAndWaitForResponseAsync<TRequestMessage, TResponseMessage>(TRequestMessage requestMessage)
+            where TRequestMessage : RequestMessageBase
+            where TResponseMessage : ResponseMessageBase
         {
             // Define local response received event.
             using var responseReceived = new ManualResetEvent(false);
-            ResponseMessageBase? response = default;
+            TResponseMessage? response = default;
 
             // Create local function that checks if received response is of current request.
             void ResponseReceivedCallback(object? sender, ResponseMessageBase? responseMessage)
@@ -92,7 +94,7 @@ namespace ContactManager.Api.Infrastructure
                         && requestMessage is RequestMessageBase requestMessageBase
                         && responseMessageBase.RequestMessageId == requestMessageBase.RequestMessageId)
                     {
-                        response = responseMessageBase;
+                        response = responseMessageBase as TResponseMessage;
                         responseReceived?.Set();
                     }
                     
@@ -118,7 +120,7 @@ namespace ContactManager.Api.Infrastructure
                 if (!responseReceived.WaitOne(timeout))
                     throw new TimeoutException($"Response for request  was not received before timeout occured");
 
-                return (response as TResponse)!;
+                return response;
             }
             finally
             {

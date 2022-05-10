@@ -45,10 +45,10 @@ namespace ContactManager.Api.Tests.Controllers
             var requestMessage = new GetRequestMessage(requestMessageId, id);
             var responseMessage = new GetResponseMessage(requestMessageId, null, MessageBus.Messages.DataTypes.Enums.StatusCode.Ok, contactData);
 
-            _messageBusMock.Setup(x => x.PublishMessageAndWaitForResponseAsync<GetResponseMessage>(It.IsAny<RequestMessageBase>()))
+            _messageBusMock.Setup(x => x.PublishMessageAndWaitForResponseAsync<GetRequestMessage, GetResponseMessage>(It.IsAny<GetRequestMessage>()))
                 .Returns<RequestMessageBase>((requestMessage) =>
                 {
-                    return Task.FromResult(responseMessage);
+                    return Task.FromResult<GetResponseMessage?>(responseMessage);
                 });
 
             var actionResult = _contactsController.Get(id).Result;
@@ -80,10 +80,10 @@ namespace ContactManager.Api.Tests.Controllers
             var requestMessage = new GetRequestMessage(requestMessageId, id);
             var responseMessage = new GetResponseMessage(requestMessageId, null, MessageBus.Messages.DataTypes.Enums.StatusCode.NotFound, null);
 
-            _messageBusMock.Setup(x => x.PublishMessageAndWaitForResponseAsync<GetResponseMessage>(It.IsAny<RequestMessageBase>()))
+            _messageBusMock.Setup(x => x.PublishMessageAndWaitForResponseAsync<GetRequestMessage, GetResponseMessage>(It.IsAny<GetRequestMessage>()))
                 .Returns<RequestMessageBase>((requestMessage) =>
                 {
-                    return Task.FromResult(responseMessage);
+                    return Task.FromResult<GetResponseMessage?>(responseMessage);
                 });
 
             var actionResult = _contactsController.Get(id).Result;
@@ -102,10 +102,10 @@ namespace ContactManager.Api.Tests.Controllers
             var requestMessage = new GetRequestMessage(requestMessageId, id);
             var responseMessage = new GetResponseMessage(requestMessageId, "some error", MessageBus.Messages.DataTypes.Enums.StatusCode.Error, null);
 
-            _messageBusMock.Setup(x => x.PublishMessageAndWaitForResponseAsync<GetResponseMessage>(It.IsAny<RequestMessageBase>()))
+            _messageBusMock.Setup(x => x.PublishMessageAndWaitForResponseAsync<GetRequestMessage, GetResponseMessage>(It.IsAny<GetRequestMessage>()))
                 .Returns<RequestMessageBase>((requestMessage) =>
                 {
-                    return Task.FromResult(responseMessage);
+                    return Task.FromResult<GetResponseMessage?>(responseMessage);
                 });
 
             var actionResult = _contactsController.Get(id).Result;

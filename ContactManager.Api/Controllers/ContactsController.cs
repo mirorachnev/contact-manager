@@ -35,7 +35,7 @@ namespace ContactManager.Api.Controllers
         {
             var getRequestMessage = new GetRequestMessage(Guid.NewGuid(), null);
 
-            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<GetResponseMessage>(getRequestMessage);
+            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<GetRequestMessage, GetResponseMessage>(getRequestMessage);
 
             if (response is null)
                 return new ObjectResult("Response was not received.") { StatusCode = StatusCodes.Status500InternalServerError };
@@ -56,7 +56,7 @@ namespace ContactManager.Api.Controllers
         {
             var getRequestMessage = new GetRequestMessage(Guid.NewGuid(), id);
 
-            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<GetResponseMessage>(getRequestMessage);
+            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<GetRequestMessage, GetResponseMessage>(getRequestMessage);
 
             if (response is null)
                 return new ObjectResult("Response was not received.") { StatusCode = StatusCodes.Status500InternalServerError };
@@ -87,7 +87,7 @@ namespace ContactManager.Api.Controllers
 
             var createMessage = new CreateRequestMessage(Guid.NewGuid(), messageData);
 
-            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<CreateResponseMessage>(createMessage);
+            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<CreateRequestMessage, CreateResponseMessage>(createMessage);
 
             if (response is null)
                 return new ObjectResult("Response was not received.") { StatusCode = StatusCodes.Status500InternalServerError };
@@ -107,7 +107,7 @@ namespace ContactManager.Api.Controllers
         {
             var deleteRequestMessage = new DeleteRequestMessage(Guid.NewGuid(), id);
 
-            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<DeleteResponseMessage>(deleteRequestMessage);
+            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<DeleteRequestMessage, DeleteResponseMessage>(deleteRequestMessage);
 
             if (response is null)
                 return new ObjectResult("Response was not received.") { StatusCode = StatusCodes.Status500InternalServerError };
@@ -135,7 +135,7 @@ namespace ContactManager.Api.Controllers
 
             var updateRequestMessage = new UpdateRequestMessage(Guid.NewGuid(), messageData);
 
-            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<UpdateResponseMessage>(updateRequestMessage);
+            var response = await _messageBus.PublishMessageAndWaitForResponseAsync<UpdateRequestMessage, UpdateResponseMessage>(updateRequestMessage);
 
             if (response is null)
                 return new ObjectResult("Response was not received.") { StatusCode = StatusCodes.Status500InternalServerError };
