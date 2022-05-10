@@ -76,7 +76,7 @@ namespace ContactManager.Api.Infrastructure
         {
             // Define local response received event.
             using var responseReceived = new ManualResetEvent(false);
-            TResponse? response = default;
+            ResponseMessageBase? response = default;
 
             // Create local function that checks if received response is of current request.
             void ResponseReceivedCallback(object? sender, MessageBase? responseMessage)
@@ -88,9 +88,11 @@ namespace ContactManager.Api.Infrastructure
                 {
                     // Assign response to a variable and signal that the response was received.
 
-                    if (responseMessage is ResponseMessageBase responseMessageBase)
+                    if (responseMessage is ResponseMessageBase responseMessageBase
+                        && requestMessage is RequestMessageBase requestMessageBase
+                        && responseMessageBase.RequestMessageId == requestMessageBase.RequestMessageId)
                     {
-                        response = responseMessage as TResponse;
+                        response = responseMessageBase;
                         responseReceived?.Set();
                     }
                     
@@ -116,7 +118,7 @@ namespace ContactManager.Api.Infrastructure
                 if (!responseReceived.WaitOne(timeout))
                     throw new TimeoutException($"Response for request  was not received before timeout occured");
 
-                return response!;
+                return (response as TResponse)!;
             }
             finally
             {
