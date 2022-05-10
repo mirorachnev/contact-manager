@@ -56,7 +56,7 @@ namespace ContactManager.Api.Infrastructure
         }
 
         /// inheritdoc
-        public Task HandleResponse(MessageBase responseMessage)
+        public Task HandleResponse(ResponseMessageBase responseMessage)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -72,7 +72,7 @@ namespace ContactManager.Api.Infrastructure
         }
 
         /// inheritdoc
-        public async Task<TResponse> PublishMessageAndWaitForResponseAsync<TResponse>(MessageBase requestMessage) where TResponse : MessageBase
+        public async Task<TResponse> PublishMessageAndWaitForResponseAsync<TResponse>(RequestMessageBase requestMessage) where TResponse : ResponseMessageBase
         {
             // Define local response received event.
             using var responseReceived = new ManualResetEvent(false);

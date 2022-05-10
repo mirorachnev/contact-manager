@@ -13,12 +13,12 @@ namespace ContactManager.Api.Infrastructure
         /// <typeparam name="TMessage">Response message</typeparam>
         /// <param name="requestMessage">Request message</param>
         /// <returns>Response</returns>
-        Task<TMessage> PublishMessageAndWaitForResponseAsync<TMessage>(MessageBase requestMessage) where TMessage : MessageBase;
+        Task<TMessage> PublishMessageAndWaitForResponseAsync<TMessage>(RequestMessageBase requestMessage) where TMessage : ResponseMessageBase;
 
         /// <summary>
         /// Handles response
         /// </summary>
         /// <param name="responseMessage">Response message</param>
-        Task HandleResponse(MessageBase responseMessage);
+        Task HandleResponse(ResponseMessageBase responseMessage);
     }
 }
