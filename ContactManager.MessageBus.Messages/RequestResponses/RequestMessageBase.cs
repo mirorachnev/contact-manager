@@ -5,7 +5,7 @@ namespace ContactManager.MessageBus.Messages.RequestResponses
     /// <summary>
     /// Base class for all request messages
     /// </summary>
-    public abstract class RequestMessageBase : MessageBase
+    public abstract class RequestMessageBase
     {
         /// <summary>
         /// Id of request message

@@ -18,7 +18,7 @@ namespace ContactManager.Api.Infrastructure
         private readonly BuiltinHandlerActivator _activator;
         private readonly IBus _bus;
 
-        private event EventHandler<MessageBase>? ResponseReceived;
+        private event EventHandler<ResponseMessageBase>? ResponseReceived;
 
         /// <summary>
         /// Constructor
@@ -79,7 +79,7 @@ namespace ContactManager.Api.Infrastructure
             ResponseMessageBase? response = default;
 
             // Create local function that checks if received response is of current request.
-            void ResponseReceivedCallback(object? sender, MessageBase? responseMessage)
+            void ResponseReceivedCallback(object? sender, ResponseMessageBase? responseMessage)
             {
                 if (responseMessage == null)
                     return;
