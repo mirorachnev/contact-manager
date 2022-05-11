@@ -32,9 +32,11 @@ namespace ContactManager.DataProvider.DbData
         /// <param name="modelBuilder">Model builder</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Primary key
             modelBuilder.Entity<Contact>()
                 .HasKey(x => x.ContactId);
                 
+            // Unique indeces
             modelBuilder.Entity<Contact>()
                 .HasIndex(x => x.Id)
                 .IsUnique();
@@ -50,6 +52,45 @@ namespace ContactManager.DataProvider.DbData
             modelBuilder.Entity<Contact>()
                 .HasIndex(x => x.Iban)
                 .IsUnique();
+
+            // Required
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.Id)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.FirstName)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.LastName)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.Email)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.PhoneNumber)
+                .HasMaxLength(25)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.DateOfBirth)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.Address)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.Iban)
+                .HasMaxLength(34)
+                .IsRequired();
 
             modelBuilder.Entity<Contact>().ToTable("Contacts");
         }
