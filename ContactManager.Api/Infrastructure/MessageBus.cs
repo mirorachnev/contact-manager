@@ -122,6 +122,11 @@ namespace ContactManager.Api.Infrastructure
 
                 return response;
             }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.Message);
+                return null;
+            }
             finally
             {
                 // Unsubscribe from the event.
