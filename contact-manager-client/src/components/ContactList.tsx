@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonToolbar, Table } from 'react-bootstrap';
 import { Contact } from '../models/contact';
-import { AddContact } from './AddContact';
+import AddContact from './AddContact';
 import { EditContact } from './EditContact';
 import contactsService from '../services/contactsService';
 
