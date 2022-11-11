@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonToolbar, Table } from 'react-bootstrap';
 import { Contact } from '../models/contact';
-import AddContact from './AddContact';
-import EditContact from './EditContact';
+import AddEditContact from './AddEditContact';
 import contactsService from '../services/contactsService';
 
 function ContactList() {
 
   const [contacts, setContacts] = useState<Contact[]>([]);
-  const [addModalShow, setAddModalShow] = useState(false);
-  const [editModalShow, setEditModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [contact, setContact] = useState<Contact>({
     firstName: '',
     lastName: '',
@@ -65,7 +64,7 @@ function ContactList() {
             <td>
               <ButtonToolbar>
                 <Button className="mr-2" variant="info"
-                  onClick={() => { setEditModalShow(true); setContact(contact); }}>
+                  onClick={() => { setModalShow(true); setContact(contact); setIsEdit(true); }}>
                   Edit
                 </Button>
 
@@ -80,23 +79,18 @@ function ContactList() {
     </Table>
 
     <ButtonToolbar>
-      <Button variant='primary'
-        onClick={() => setAddModalShow(true)}>
+        <Button variant='primary'
+          onClick={() => { setModalShow(true); setIsEdit(false); }}>
         Add Contact</Button>
     </ButtonToolbar>
 
-    <AddContact
-      show={addModalShow}
-      onHide={() => setAddModalShow(false)}
-      reloadData={() => getContacts()}
-    />
-
-    <EditContact
-      show={editModalShow}
-      onHide={() => setEditModalShow(false)}
-      reloadData={() => getContacts()}
-      contact={contact}
-    />
+      <AddEditContact
+        edit={isEdit}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        reloadData={() => getContacts()}
+        contact={isEdit ? contact : undefined}
+    />      
   </>
   );    
 }
